@@ -10,7 +10,7 @@ app.use(express.json())
 
 app.get('/api/products', productCtrl.getAll)
 app.get('/api/products/:id', productCtrl.getOne)
-app.put('./api/products/:id', productCtrl.update)
+app.put('/api/products/:id', productCtrl.update)
 app.post('/api/products', productCtrl.create)
 app.delete('/api/products/:id', productCtrl.delete)
 

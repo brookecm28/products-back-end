@@ -3,9 +3,9 @@ module.exports = {
         const db = req.app.get('db')
         const {name, description, price, image_url} = req.body
 
-        db.create_product()
-        .then(() => {
-            res.status(200).send(res)
+        db.create_product([name, description, price, image_url])
+        .then((product) => {
+            res.status(200).send(product)
         })
         .catch((err) => {
             res.status(500).send('Something went wrong!')
@@ -31,7 +31,7 @@ module.exports = {
             res.status(200).send(products)
         }).catch((err) => {
             res.status(500).send('Something went wrong!')
-            console.llog(err)
+            console.log(err)
         })
      
     },
@@ -40,10 +40,24 @@ module.exports = {
         const {id} = req.params
         const {desc} = req.query
     
+
+        db.update_product([id, desc]).then((product) => {
+            res.status(200).send(product)
+        }).catch((err) => {
+            res.status(500).send('Something went wrong!')
+            console.log(err)
+        })
     },
     delete: (req, res) => {
         const db = req.app.get('db')
         const {id} = req.params
+
+        db.delete_product([id]).then((product) => {
+            res.status(200).send(product)
+        }).catch((err) => {
+            res.status(500).send('Something went wrong!')
+            console.log(err)
+        })
 
     }
 }

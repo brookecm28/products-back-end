@@ -7,7 +7,7 @@ module.exports = {
         .then(() => {
             res.status(200).send(res)
         })
-        .catch(() => {
+        .catch((err) => {
             res.status(500).send('Something went wrong!')
             console.log(err)
         })
@@ -15,6 +15,13 @@ module.exports = {
     getOne: (req, res) => {
         const db = req.app.get('db')
         const {id} = req.params
+
+        db.read_product([id]).then((product) => {
+            res.status(200).send(product)
+        }).catch((err) => {
+            res.status(500).send('Something went wrong!')
+            console.log(err)
+        })
     
     },
     getAll: (req, res) => {
